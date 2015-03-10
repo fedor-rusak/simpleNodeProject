@@ -34,6 +34,24 @@ And HTML was created with second solution in mind. When the sexiest technology w
 
 But in its basic state it looks like... it's [1996](http://ekarj.com/internet96.htm) again! That is patched and fixed by duck-tape called Cascade Style Sheets. Standard for prettifying all this XML-based atrocity. Intentions were all good but when you dig a bit dipper you feel like... you want kill something right away.
 
+I am ready to stop whining and post some code.
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Simple web application</title>
+		<script>
+			//code goes here!!
+		</script>
+	</head>
+	<body>
+	    <div>Hello world!</div>
+	</body>
+</html>
+```
+
 [This](http://learnlayout.com/) may be useful.
 
 ## Javascript
