@@ -30,7 +30,7 @@ Solutions:
 
 While first solution seems good it really sucks when you have have more than 10 elements on your screen, or you want to reuse it, or you want to collaborate with designer, or port it to other platform. I think you have got my point.
 
-And HTML was created with second solution in mind. When the sexiest technology was XML... And even if you use erb, jade, wtf, gtfo or other template-engine in the end of the day it will be translated to HTML.
+And HTML was created with second solution in mind. When the sexiest technology was ...XML. And even if you use erb, jade, wtf, gtfo or other template-engine in the end of the day it will be translated to HTML.
 
 But in its basic state it looks like... it's [1996](http://ekarj.com/internet96.htm) again! That is patched and fixed by duck-tape called Cascade Style Sheets. Standard for prettifying all this XML-based atrocity. Intentions were all good but when you dig a bit dipper you feel like... you want kill something right away.
 
@@ -186,3 +186,46 @@ require("http").createServer(
 ).listen(1337, '127.0.0.1');
 console.log('Our super server running at http://127.0.0.1:1337/');
 ```
+
+## Popular names and concepts
+
+### HTTP
+
+To me HyperText means nothing but Transfer Protocol sounds promising.
+
+So if we have two computers, how they gonna understand each other? Thay have a special format for their messages!
+
+For example you want some index.html page:
+
+```
+GET http://127.0.0.1:1337/index.html
+Host: 127.0.0.1:1337
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://127.0.0.1:1337/
+Connection: keep-alive
+
+This is body section. It must end with newline.
+
+```
+
+There are FOUR sections:
+
+ * first word is method name (GET, POST, PUT, DELETE, etc)
+ * then goes address of required resource
+ * each line of "name: value" represents header field (section ends with newline)
+ * additional content for request
+
+In best case scenario after sending request you will get response.
+
+```
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+This is body section. It must end with newline.
+
+```
+
+First line represents status of request. There are plenty of other codes. You can find 404 :).
