@@ -47,7 +47,27 @@ I am ready to stop whining and post some code.
 		</script>
 	</head>
 	<body>
-	    <div>Hello world!</div>
+		<div>Hello world!</div>
+	</body>
+</html>
+```
+
+Let's make it more like GUI.
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Simple web application</title>
+		<script>
+			//code goes here!!
+		</script>
+	</head>
+	<body>
+		<div>Our simple GUI</div>
+		<input type="text" value="simple data"></input>
+		<button>Simple button!</button>
 	</body>
 </html>
 ```
@@ -57,6 +77,8 @@ I am ready to stop whining and post some code.
 ## Javascript
 
 It is not Java and I kind of like it.
+
+### Simple examples
 
 Save this in index.html and open in your browser.
 
@@ -136,6 +158,101 @@ One more trick :) with functions.
 ```
 
 Tastes differ. But composing program from small understandable pieces works for me.
+
+### Useful examples
+
+Now will be the lousiest part of javascript usage. It is called [DOM API](#dom-api). Most people prefer to call it jQuery.
+
+Problem - make something happen on button click!
+
+Solutions:
+
+ * extend some instance of some class
+ * use some magical object to get another special object to set special field to special function
+
+Wann guess? Yeap, we've got the second case.
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Simple web application</title>
+		<script>
+			var button = document.getElementsByTagName("button")[0];
+
+			button.onclick = function(e) {alert("clicked!");}
+		</script>
+	</head>
+	<body>
+		<div>Our simple GUI</div>
+		<input type="text" value="simple data"></input>
+		<button>Simple button!</button>
+	</body>
+</html>
+```
+
+But know what is a problem? It aint works.
+
+If you will open developer tools in your preferred browser. like F12 or Ctrl+Shift+i. And point to console you would see:
+
+```
+TypeError: button is undefined
+```
+
+Actually our button variable is empty. Because whole page is computed like scenario from top to the bottom. And at the moment of our search there is no button element yet.
+
+Here comes the band-aid.
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Simple web application</title>
+		<script>
+			window.onload = function() {
+				var button = document.getElementsByTagName("button")[0];
+
+				button.onclick = function(e) {alert("clicked!");}
+			}
+		</script>
+	</head>
+	<body>
+		<div>Our simple GUI</div>
+		<input type="text" value="simple data"></input>
+		<button>Simple button!</button>
+	</body>
+</html>
+```
+
+One more thing and we can interact with our input element.
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Simple web application</title>
+		<script>
+			window.onload = function() {
+				var button = document.getElementsByTagName("button")[0];
+
+				var input = document.getElementsByTagName("input")[0];
+
+				button.onclick = function(e) {alert(input.value);}
+			}
+		</script>
+	</head>
+	<body>
+		<div>Our simple GUI</div>
+		<input type="text" value="simple data"></input>
+		<button>Simple button!</button>
+	</body>
+</html>
+```
+
+Cool things ahead! Stay tuned.
 
 ## NodeJS
 
@@ -232,3 +349,13 @@ This is body section. It must end with newline.
 ```
 
 First line represents status of request. There are plenty of other codes. You can find 404 :).
+
+### DOM API
+
+This name stands for Domain Object Model aaaaand it says nothing to me too.
+
+Short smart answer - browser-implemented API for interacting with HTML-document.
+
+When you load your html-page browser treats it as tree-structure of DOM nodes.
+
+It abstracts user behaviour as sequence of events which can be processed by your javascript code.

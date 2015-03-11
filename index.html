@@ -4,28 +4,18 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Simple web application</title>
 		<script>
-			var concatArray = function(elements) {
-				var result = "";
+			window.onload = function() {
+				var button = document.getElementsByTagName("button")[0];
 
-				for (var i = 0; i < elements.length; i++)
-					result += elements[i];
+				var input = document.getElementsByTagName("input")[0];
 
-				return result;
+				button.onclick = function(e) {alert(input.value);}
 			}
-
-			var concatArrayWithCallback = function(data, callback) {
-				callback(concatArray(data));
-			}
-
-			concatArrayWithCallback(
-				["Hello", " ", "world", "!"],
-				function(data) {
-					alert(data);
-				}
-			);
 		</script>
 	</head>
 	<body>
-	    <div>Hello world!</div>
+		<div>Our simple GUI</div>
+		<input type="text" value="simple data"></input>
+		<button>Simple button!</button>
 	</body>
 </html>
