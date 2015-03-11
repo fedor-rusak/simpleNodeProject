@@ -198,7 +198,7 @@ So if we have two computers, how they gonna understand each other? Thay have a s
 For example you want some index.html page:
 
 ```
-GET http://127.0.0.1:1337/index.html
+GET http://127.0.0.1:1337/index.html HTTP/1.1
 Host: 127.0.0.1:1337
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:35.0) Gecko/20100101 Firefox/35.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -211,12 +211,14 @@ This is body section. It must end with newline.
 
 ```
 
-There are FOUR sections:
+There are FIVE sections:
 
  * first word is method name (GET, POST, PUT, DELETE, etc)
  * then goes address of required resource
  * each line of "name: value" represents header field (section ends with newline)
  * additional content for request
+
+[This](http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html) may be useful for most boring people.
 
 In best case scenario after sending request you will get response.
 
