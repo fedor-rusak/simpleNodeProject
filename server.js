@@ -18,14 +18,20 @@ require("http").createServer(
 		else if (req.method == 'GET') {
 			console.log("GET request on: " + req.url);
 
-			fs.readFile("./index.html", function (err, data) {
-				if (err) {
-					res.writeHead(404);
-					res.end('Not found' + err);
-				}
+			if (req.url == '/some_resource') {
+				res.writeHead(200);
+				res.end("some new stuff");
+			}
+			else {
+				fs.readFile("./index.html", function (err, data) {
+					if (err) {
+						res.writeHead(404);
+						res.end('Not found' + err);
+					}
 
-				res.end(data);
-			});
+					res.end(data);
+				});
+			}
 		}
 	}
 ).listen(1337, '127.0.0.1');

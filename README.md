@@ -70,6 +70,22 @@ Let's make it more like GUI.
 </html>
 ```
 
+Let's add a link to another resource.
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Simple web application</title>
+	</head>
+	<body>
+		<div>Our great link</div>
+		<div><a href="some_resource">open new stuff</a></div>
+	</body>
+</html>
+```
+
 ### Useful examples
 
 So how can we send a POST request from html page?
@@ -365,6 +381,49 @@ console.log('Our sophisticated server running at http://127.0.0.1:1337/');
 
 It is done using NodeJS mechanism of events. On each "data" event we read part of request-body and append it to variable body. When event "end" is triggered it means that reading is finished and we can send the result to a client.
 
+But what if we want to provide different files on differen queries?
+
+```javascript
+var fs = require("fs");
+
+require("http").createServer(
+	function (req, res) {
+		if (req.method == 'POST') {
+			console.log("POST request on: " + req.url);
+
+			var body = '';
+			req.on('data', function (data) {
+				body += data;
+			});
+
+			req.on('end', function () {
+				res.writeHead(200);
+				res.end("data: " + body);
+			});
+		}
+		else if (req.method == 'GET') {
+			console.log("GET request on: " + req.url);
+
+			if (req.url == '/some_resource') {
+				res.writeHead(200);
+				res.end("some new stuff");
+			}
+			else {
+				fs.readFile("./index.html", function (err, data) {
+					if (err) {
+						res.writeHead(404);
+						res.end('Not found' + err);
+					}
+
+					res.end(data);
+				});
+			}
+		}
+	}
+).listen(1337, '127.0.0.1');
+console.log('Our sophisticated server running at http://127.0.0.1:1337/');
+```
+
 ## Popular names and concepts
 
 ### HTTP
@@ -420,3 +479,7 @@ Short smart answer - browser-implemented API for interacting with HTML-document.
 When you load your html-page browser treats it as tree-structure of DOM nodes.
 
 It abstracts user behaviour as sequence of events which can be processed by your javascript code.
+
+### URL
+
+You can read [wikipedia](http://en.wikipedia.org/wiki/Uniform_resource_locator) as for me it is just an address of resource or service.
