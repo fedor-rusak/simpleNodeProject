@@ -215,6 +215,7 @@ There are FIVE sections:
 
  * first word is method name (GET, POST, PUT, DELETE, etc)
  * then goes address of required resource
+ * HTTP-Version
  * each line of "name: value" represents header field (section ends with newline)
  * additional content for request
 
