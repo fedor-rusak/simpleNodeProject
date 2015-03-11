@@ -13,7 +13,7 @@ There is gigantic amount of technical complexity covered by popular names and co
 
 Now we need three of them:
 
- * HTML/CSS - basis for UI.
+ * HTML/CSS - basis for GUI.
  * Javascript - language for development.
  * NodeJS - server framework.
 
@@ -34,6 +34,10 @@ And HTML was created with second solution in mind. When the sexiest technology w
 
 But in its basic state it looks like... it's [1996](http://ekarj.com/internet96.htm) again! That is patched and fixed by duck-tape called Cascade Style Sheets. Standard for prettifying all this XML-based atrocity. Intentions were all good but when you dig a bit dipper you feel like... you want kill something right away.
 
+[This](http://learnlayout.com/) may be useful.
+
+### Simple examples
+
 I am ready to stop whining and post some code.
 
 ```html
@@ -42,9 +46,6 @@ I am ready to stop whining and post some code.
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Simple web application</title>
-		<script>
-			//code goes here!!
-		</script>
 	</head>
 	<body>
 		<div>Hello world!</div>
@@ -60,9 +61,6 @@ Let's make it more like GUI.
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Simple web application</title>
-		<script>
-			//code goes here!!
-		</script>
 	</head>
 	<body>
 		<div>Our simple GUI</div>
@@ -72,7 +70,27 @@ Let's make it more like GUI.
 </html>
 ```
 
-[This](http://learnlayout.com/) may be useful.
+### Useful examples
+
+So how can we send a POST request from html page?
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Simple web application</title>
+	</head>
+	<body>
+		<form action="this_url_will_be_opened" method="POST">
+			<input type="text"	 value="simple data" name="data"></input>
+			<input type="submit" value="Send!"></input>
+		</form>
+	</body>
+</html>
+```
+
+After clicking "Send!" browser will open address specified in action attribute.
 
 ## Javascript
 
@@ -260,7 +278,9 @@ We are talking about [this](https://nodejs.org/) thing.
 
 You should download binary for your platform and bla-bla-bla. They have really great tutorial on their site. Yet I am gonna copy it here.
 
-Simple app that responds with "Hello World" for every request.
+### Simple examples
+
+App that responds with "Hello World" for every request.
 
 ```javascript
 require('http').createServer(
@@ -303,6 +323,47 @@ require("http").createServer(
 ).listen(1337, '127.0.0.1');
 console.log('Our super server running at http://127.0.0.1:1337/');
 ```
+
+### Useful examples
+
+Let's read data that was sent with POST request and send it back to browser.
+
+```javascript
+var fs = require("fs");
+
+require("http").createServer(
+	function (req, res) {
+		if (req.method == 'POST') {
+			console.log("POST request on: " + req.url);
+
+			var body = '';
+			req.on('data', function (data) {
+				body += data;
+			});
+
+			req.on('end', function () {
+				res.writeHead(200);
+				res.end("data: " + body);
+			});
+		}
+		else if (req.method == 'GET') {
+			console.log("GET request on: " + req.url);
+
+			fs.readFile("./index.html", function (err, data) {
+				if (err) {
+					res.writeHead(404);
+					res.end('Not found' + err);
+				}
+
+				res.end(data);
+			});
+		}
+	}
+).listen(1337, '127.0.0.1');
+console.log('Our sophisticated server running at http://127.0.0.1:1337/');
+```
+
+It is done using NodeJS mechanism of events. On each "data" event we read part of request-body and append it to variable body. When event "end" is triggered it means that reading is finished and we can send the result to a client.
 
 ## Popular names and concepts
 

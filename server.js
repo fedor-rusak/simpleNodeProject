@@ -4,8 +4,16 @@ require("http").createServer(
 	function (req, res) {
 		if (req.method == 'POST') {
 			console.log("POST request on: " + req.url);
-			res.writeHead(200);
-			res.end("Ok");
+
+			var body = '';
+			req.on('data', function (data) {
+				body += data;
+			});
+
+			req.on('end', function () {
+				res.writeHead(200);
+				res.end("data: " + body);
+			});
 		}
 		else if (req.method == 'GET') {
 			console.log("GET request on: " + req.url);
@@ -21,4 +29,4 @@ require("http").createServer(
 		}
 	}
 ).listen(1337, '127.0.0.1');
-console.log('Our smart server running at http://127.0.0.1:1337/');
+console.log('Our sophisticated server running at http://127.0.0.1:1337/');
