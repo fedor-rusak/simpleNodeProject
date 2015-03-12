@@ -286,7 +286,54 @@ One more thing and we can interact with our input element.
 </html>
 ```
 
-Cool things ahead! Stay tuned.
+### Hard examples
+
+I hate when sending data triggers opening stupid address. Let's fix it.
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Simple web application</title>
+		<script>
+			window.onload = function() {
+				var inputArray = document.getElementsByTagName("input");
+
+				var alertButton = inputArray[1];
+				alertButton.onclick = function(e) {alert(inputArray[0].value);}
+
+				var sendButton = inputArray[3];
+				sendButton.onclick = function(e) {
+					var xhr = new XMLHttpRequest();
+
+					var requestIsAsynchronous = true;
+					xhr.open("POST", "url_for_post_processing", requestIsAsynchronous);
+					xhr.responseType = "text";
+
+					xhr.send(inputArray[2].value);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div>Our simple GUI</div>
+		<div><a href="some_resource">open new stuff</a></div>
+
+		<div>
+			<input type="text" value="simple data"></input>
+			<input type="submit" value="Alert!"></input>
+		</div>
+
+		<div>
+			<input type="text"   value="simple data"></input>
+			<input type="submit" value="Send!"></input>
+		</div>
+	</body>
+</html>
+```
+
+Soon we will read resource without opening new address!
 
 ## NodeJS
 
@@ -529,3 +576,11 @@ It abstracts user behaviour as sequence of events which can be processed by your
 ### URL
 
 You can read [wikipedia](http://en.wikipedia.org/wiki/Uniform_resource_locator) as for me it is just an address of resource or service.
+
+### XMLHttpRequest
+
+This is the technical thing behined AJAX.
+
+It is API for performing requests without reloading browser page.
+
+It is standardized way for making interactive web-applications like GMail.

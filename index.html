@@ -5,23 +5,36 @@
 		<title>Simple web application</title>
 		<script>
 			window.onload = function() {
-				var button = document.getElementsByTagName("button")[0];
+				var inputArray = document.getElementsByTagName("input");
 
-				var input = document.getElementsByTagName("input")[0];
+				var alertButton = inputArray[1];
+				alertButton.onclick = function(e) {alert(inputArray[0].value);}
 
-				button.onclick = function(e) {alert(input.value);}
+				var sendButton = inputArray[3];
+				sendButton.onclick = function(e) {
+					var xhr = new XMLHttpRequest();
+
+					var requestIsAsynchronous = true;
+					xhr.open("POST", "url_for_post_processing", requestIsAsynchronous);
+					xhr.responseType = "text";
+
+					xhr.send(inputArray[2].value);
+				}
 			}
 		</script>
 	</head>
 	<body>
 		<div>Our simple GUI</div>
 		<div><a href="some_resource">open new stuff</a></div>
-		<input type="text" value="simple data"></input>
-		<button>Simple button!</button>
 
-		<form action="this_url_will_be_opened" method="POST">
-			<input type="text"   value="simple data" name="data"></input>
-			<input type="submit" value="Send!" ></input>
-		</form>
+		<div>
+			<input type="text" value="simple data"></input>
+			<input type="submit" value="Alert!"></input>
+		</div>
+
+		<div>
+			<input type="text"   value="simple data"></input>
+			<input type="submit" value="Send!"></input>
+		</div>
 	</body>
 </html>
