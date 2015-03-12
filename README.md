@@ -4,7 +4,7 @@ Application software - computer implementation of dictionary and grammar for lan
 
 Web - network of computers providing resources and services using standard-based interfaces.
 
-Web-applications (that are discussed here) - application software that works in web.
+Web applications (that are discussed here) - application software that works in web.
 
 
 # Web-applications reality
@@ -334,6 +334,62 @@ I hate when sending data triggers opening stupid address. Let's fix it.
 ```
 
 Soon we will read resource without opening new address!
+
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Simple web application</title>
+		<script>
+			window.onload = function() {
+				var inputArray = document.getElementsByTagName("input");
+
+				var readButton = inputArray[1];
+				readButton.onclick = function(e) {
+					var xhr = new XMLHttpRequest();
+
+					xhr.onreadystatechange = function() {
+						if (xhr.readyState == 4) {
+							//successful response
+							inputArray[0].value = xhr.responseText;
+						}
+					}
+					var requestIsAsynchronous = true;
+					xhr.open("GET", "some_resource", requestIsAsynchronous);
+
+					xhr.send();
+				}
+
+				var sendButton = inputArray[3];
+				sendButton.onclick = function(e) {
+					var xhr = new XMLHttpRequest();
+
+					var requestIsAsynchronous = true;
+					xhr.open("POST", "url_for_post_processing", requestIsAsynchronous);
+					xhr.responseType = "text";
+
+					xhr.send(inputArray[2].value);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div>Our simple GUI</div>
+
+		<div>
+			<input type="text" value="simple data"></input>
+			<input type="submit" value="Read!"></input>
+		</div>
+
+		<div>
+			<input type="text"   value="simple data"></input>
+			<input type="submit" value="Send!"></input>
+		</div>
+	</body>
+</html>
+```
 
 ## NodeJS
 

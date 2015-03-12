@@ -7,8 +7,22 @@
 			window.onload = function() {
 				var inputArray = document.getElementsByTagName("input");
 
-				var alertButton = inputArray[1];
-				alertButton.onclick = function(e) {alert(inputArray[0].value);}
+				var readButton = inputArray[1];
+				readButton.onclick = function(e) {
+					var xhr = new XMLHttpRequest();
+
+					xhr.onreadystatechange = function() {
+						if (xhr.readyState == 4) {
+							//successful response
+							inputArray[0].value = xhr.responseText;
+						}
+					}
+					var requestIsAsynchronous = true;
+					xhr.open("GET", "some_resource", requestIsAsynchronous);
+					xhr.responseType = "text";
+
+					xhr.send();
+				}
 
 				var sendButton = inputArray[3];
 				sendButton.onclick = function(e) {
@@ -25,11 +39,10 @@
 	</head>
 	<body>
 		<div>Our simple GUI</div>
-		<div><a href="some_resource">open new stuff</a></div>
 
 		<div>
 			<input type="text" value="simple data"></input>
-			<input type="submit" value="Alert!"></input>
+			<input type="submit" value="Read!"></input>
 		</div>
 
 		<div>
