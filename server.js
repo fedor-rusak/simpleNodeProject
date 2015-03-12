@@ -1,5 +1,7 @@
 var fs = require("fs");
 
+var state = "initial_data";
+
 require("http").createServer(
 	function (req, res) {
 		if (req.method == 'POST') {
@@ -11,8 +13,9 @@ require("http").createServer(
 			});
 
 			req.on('end', function () {
+				state = body;
 				res.writeHead(200);
-				res.end("data: " + body);
+				res.end("data: " + state);
 			});
 		}
 		else if (req.method == 'GET') {
@@ -20,7 +23,7 @@ require("http").createServer(
 
 			if (req.url == '/some_resource') {
 				res.writeHead(200);
-				res.end("some new stuff");
+				res.end(state);
 			}
 			else {
 				fs.readFile("./index.html", function (err, data) {
@@ -35,4 +38,4 @@ require("http").createServer(
 		}
 	}
 ).listen(1337, '127.0.0.1');
-console.log('Our sophisticated server running at http://127.0.0.1:1337/');
+console.log('Our data saving server running at http://127.0.0.1:1337/');
