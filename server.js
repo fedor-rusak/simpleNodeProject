@@ -34,6 +34,19 @@ function manageAndReturnCookie(req, res, cookieJar) {
 	return cookie;
 }
 
+function readAndSendFileOr404(filePath, res) {
+	fs.readFile(filePath,
+		function (err, data) {
+			if (err) {
+				res.writeHead(404);
+				res.end('Not found' + err);
+			}
+
+			res.end(data);
+		}
+	);
+}
+
 require("http").createServer(
 	function (req, res) {
 		var cookie = manageAndReturnCookie(req, res, sessions);
@@ -59,15 +72,11 @@ require("http").createServer(
 				res.writeHead(200);
 				res.end(sessions[cookie]);
 			}
+			else if (req.url == '/signin.html') {
+				readAndSendFileOr404("."+req.url, res);
+			}
 			else {
-				fs.readFile("./index.html", function (err, data) {
-					if (err) {
-						res.writeHead(404);
-						res.end('Not found' + err);
-					}
-
-					res.end(data);
-				});
+				readAndSendFileOr404("./index.html", res);
 			}
 		}
 	}

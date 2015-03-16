@@ -108,6 +108,62 @@ So how can we send a POST request from html page?
 
 After clicking "Send!" browser will open address specified in action attribute.
 
+### Hard examples
+
+Making nice GUI from scratch requires deep knowledge of subject and design and whatever.
+
+But in case of web application we can find some frameworks and examples to start from.
+
+This one is from [Bootstrap](http://getbootstrap.com/) documentation.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
+```
+
+At first seconds it looks bad because it loads styles from external server.
+
+Yet code is quite small because all the CSS is added through links. But... if you try to open those links in browser you would be shocked :) not in a good way.
+
+File bootstrap.min.css has line about 115000 symbols long in it. And it is after "minification"? Bullshit!
+
+Soon we will find out what to do with all this mess!
+
 ## Javascript
 
 It is not Java and I kind of like it.
