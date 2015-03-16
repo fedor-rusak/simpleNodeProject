@@ -573,6 +573,94 @@ require("http").createServer(
 console.log('Our data saving server running at http://127.0.0.1:1337/');
 ```
 
+### Hard examples
+
+There is fallacy in previous example. If we open two browsers and save data in each of them then the second result will erase the first. It is more like modification of shared resource.
+
+Let's make a unique storage for each user!
+
+```javascript
+var fs = require("fs");
+
+var sessions = {};
+
+function generateCookie() {
+	return "cookie_" + Math.random();
+}
+
+function createAndReturnCookie(cookieJar) {
+	var cookie = generateCookie();
+
+	while (true) {
+		if (cookieJar[cookie] == undefined) {
+			cookieJar[cookie] = {};
+			break;
+		}
+		else {
+			cookie = generateCookie();
+		}
+	}
+
+	return cookie;
+}
+
+function manageAndReturnCookie(req, res, cookieJar) {
+	var cookie = req.headers["cookie"];
+
+	if (cookie == undefined) {
+		cookie = createAndReturnCookie(cookieJar);
+
+		res.setHeader("Set-Cookie", cookie);
+	}
+
+	return cookie;
+}
+
+require("http").createServer(
+	function (req, res) {
+		var cookie = manageAndReturnCookie(req, res, sessions);
+
+		if (req.method == 'POST') {
+			console.log("POST request on: " + req.url);
+
+			var body = '';
+			req.on('data', function (data) {
+				body += data;
+			});
+
+			req.on('end', function () {
+				sessions[cookie] = body;
+				res.writeHead(200);
+				res.end("data: " + sessions[cookie]);
+			});
+		}
+		else if (req.method == 'GET') {
+			console.log("GET request on: " + req.url);
+
+			if (req.url == '/some_resource') {
+				res.writeHead(200);
+				res.end(sessions[cookie]);
+			}
+			else {
+				fs.readFile("./index.html", function (err, data) {
+					if (err) {
+						res.writeHead(404);
+						res.end('Not found' + err);
+					}
+
+					res.end(data);
+				});
+			}
+		}
+	}
+).listen(1337, '127.0.0.1');
+console.log('Our multi-user server running at http://127.0.0.1:1337/');
+```
+
+More details at [this](#cookies-and-sessions) part.
+
+It is quite complicated
+
 ## Popular names and concepts
 
 ### HTTP
@@ -640,3 +728,23 @@ This is the technical thing behined AJAX.
 It is API for performing requests without reloading browser page.
 
 It is standardized way for making interactive web-applications like GMail.
+
+### Cookies and sessions
+
+HTTP protocol keeps no state. It was designed like some language for queries and updates.
+
+Most web appps designed to keep information on server and provide unified addresses for every user.
+
+So how to distinguish one from another if address is the same and protocol is the same?
+
+Here comes the cookie!
+
+It is a special header-field that keeps a unique identifier which is sent back and forth between server and browser in particular time period.
+
+Interaction from opening web app till closing it in browser - session.
+
+Special piece of server-data that is associated with particular user - session.
+
+And they are connected through cookie value which lives by its own rules.
+
+Enjoy your cookies!

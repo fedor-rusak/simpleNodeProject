@@ -1,9 +1,43 @@
 var fs = require("fs");
 
-var state = "initial_data";
+var sessions = {};
+
+function generateCookie() {
+	return "cookie_" + Math.random();
+}
+
+function createAndReturnCookie(cookieJar) {
+	var cookie = generateCookie();
+
+	while (true) {
+		if (cookieJar[cookie] == undefined) {
+			cookieJar[cookie] = {};
+			break;
+		}
+		else {
+			cookie = generateCookie();
+		}
+	}
+
+	return cookie;
+}
+
+function manageAndReturnCookie(req, res, cookieJar) {
+	var cookie = req.headers["cookie"];
+
+	if (cookie == undefined) {
+		cookie = createAndReturnCookie(cookieJar);
+
+		res.setHeader("Set-Cookie", cookie);
+	}
+
+	return cookie;
+}
 
 require("http").createServer(
 	function (req, res) {
+		var cookie = manageAndReturnCookie(req, res, sessions);
+
 		if (req.method == 'POST') {
 			console.log("POST request on: " + req.url);
 
@@ -13,9 +47,9 @@ require("http").createServer(
 			});
 
 			req.on('end', function () {
-				state = body;
+				sessions[cookie] = body;
 				res.writeHead(200);
-				res.end("data: " + state);
+				res.end("data: " + sessions[cookie]);
 			});
 		}
 		else if (req.method == 'GET') {
@@ -23,7 +57,7 @@ require("http").createServer(
 
 			if (req.url == '/some_resource') {
 				res.writeHead(200);
-				res.end(state);
+				res.end(sessions[cookie]);
 			}
 			else {
 				fs.readFile("./index.html", function (err, data) {
@@ -38,4 +72,4 @@ require("http").createServer(
 		}
 	}
 ).listen(1337, '127.0.0.1');
-console.log('Our data saving server running at http://127.0.0.1:1337/');
+console.log('Our multi-user server running at http://127.0.0.1:1337/');
