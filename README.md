@@ -180,6 +180,8 @@ First of all let's serve our own style sheets. Main difference with old version:
   </head>
 ```
 
+If you want to change content of these CSS files then I strongly advise you to use that [hack](#minimize-css).
+
 ## Javascript
 
 It is not Java and I kind of like it.
@@ -688,16 +690,16 @@ function manageAndReturnCookie(req, res, cookieJar) {
 	return cookie;
 }
 
-function error404(res) {
+function error404(res, error) {
 	res.writeHead(404);
-	res.end('Not found: ' + err);
+	res.end('Not found: ' + error);
 }
 
 function readAndSendFileOr404(filePath, res) {
 	fs.readFile(filePath,
 		function (err, data) {
 			if (err) {
-				error404(res);
+				error404(res, err);
 			}
 			else {
 				res.end(data);
@@ -743,7 +745,7 @@ require("http").createServer(
 				readAndSendFileOr404(getURLsToFiles[req.url], res);
 			}
 			else {
-				error404(res);
+				error404(res, req.url);
 			}
 		}
 	}
@@ -755,13 +757,27 @@ More details at [this](#cookies-and-sessions) part.
 
 It is quite complicated yet no additional libs.
 
+## Hacks&Tricks
+
+### Minimize CSS
+
+Idea - find information about unused CSS styles, export this data, use it to really minimize CSS.
+
+My implementation includes two additional steps:
+
+1. Format CSS files to be one block per line. I do it with this [service](http://www.lonniebest.com/formatcss/).
+2. Remove multi-line sections like @media queries.
+3. Use Firefox with plugin [Dust-Me Selectors](https://addons.mozilla.org/ru/firefox/addon/dust-me-selectors/) to scan your page (with formatted CSS).
+4. Export used selectors in JSON format
+5. Use hand-written program to remove unused CSS.
+
 ## Popular names and concepts
 
 ### HTTP
 
 To me HyperText means nothing but Transfer Protocol sounds promising.
 
-So if we have two computers, how they gonna understand each other? Thay have a special format for their messages!
+So if we have two computers, how they gonna understand each other? They have a special format for their messages!
 
 For example you want some index.html page:
 

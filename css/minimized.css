@@ -1,0 +1,111 @@
+html {font-family: sans-serif; ms-text-size-adjust: 100%; webkit-text-size-adjust: 100%; }
+body {margin: 0; }
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {display: block; }
+audio, canvas, progress, video {display: inline-block; vertical-align: baseline; }
+template {display: none; }
+a {background-color: transparent; }
+a:active, a:hover {outline: 0; }
+b, strong {font-weight: 700; }
+dfn {font-style: italic; }
+h1 {font-size: 2em; margin: .67em 0; }
+mark {background: #ff0; color: #000; }
+small {font-size: 80%; }
+sub, sup {font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup {top: -.5em; }
+sub {bottom: -.25em; }
+img {border: 0; }
+figure {margin: 1em 40px; }
+hr {box-sizing: content-box; height: 0; moz-box-sizing: content-box; webkit-box-sizing: content-box; }
+pre {overflow: auto; }
+code, kbd, pre, samp {font-family: monospace,monospace; font-size: 1em; }
+button, input, optgroup, select, textarea {color: inherit; font: inherit; margin: 0; }
+button {overflow: visible; }
+button, select {text-transform: none; }
+button {cursor: pointer; webkit-appearance: button; }
+button::-moz-focus-inner, input::-moz-focus-inner {border: 0; padding: 0; }
+input {line-height: normal; }
+input[type="checkbox"] {box-sizing: border-box; moz-box-sizing: border-box; padding: 0; webkit-box-sizing: border-box; }
+fieldset {border: 1px solid silver; margin: 0 2px; padding: .35em .625em .75em; }
+legend {border: 0; padding: 0; }
+textarea {overflow: auto; }
+optgroup {font-weight: 700; }
+table {border-collapse: collapse; border-spacing: 0; }
+td, th {padding: 0; }
+a, a:visited {text-decoration: underline; }
+blockquote, pre {border: 1px solid #999; page-break-inside: avoid; }
+thead {display: table-header-group; }
+img, tr {page-break-inside: avoid; }
+img {max-width: 100%!important; }
+h2, h3, p {orphans: 3; widows: 3; }
+h2, h3 {page-break-after: avoid; }
+select {background: #fff!important; }
+* {box-sizing: border-box; moz-box-sizing: border-box; webkit-box-sizing: border-box; }
+*::after, *::before {box-sizing: border-box; moz-box-sizing: border-box; webkit-box-sizing: border-box; }
+html {font-size: 10px; webkit-tap-highlight-color: rgba(0,0,0,0); }
+body {background-color: #fff; color: #333; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 14px; line-height: 1.42857143; }
+button, input, select, textarea {font-family: inherit; font-size: inherit; line-height: inherit; }
+a {color: #337ab7; text-decoration: none; }
+a:focus, a:hover {color: #23527c; text-decoration: underline; }
+a:focus {outline: 5px auto -webkit-focus-ring-color; outline: thin dotted; outline-offset: -2px; }
+figure {margin: 0; }
+img {vertical-align: middle; }
+hr {border: 0; border-top: 1px solid #eee; margin-bottom: 20px; margin-top: 20px; }
+.sr-only {border: 0; clip: rect(0,0,0,0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+h1, h2, h3, h4, h5, h6 {color: inherit; font-family: inherit; font-weight: 500; line-height: 1.1; }
+h1, h2, h3 {margin-bottom: 10px; margin-top: 20px; }
+h4, h5, h6 {margin-bottom: 10px; margin-top: 10px; }
+h1 {font-size: 36px; }
+h2 {font-size: 30px; }
+h3 {font-size: 24px; }
+h4 {font-size: 18px; }
+h5 {font-size: 14px; }
+h6 {font-size: 12px; }
+p {margin: 0 0 10px; }
+small {font-size: 85%; }
+mark {background-color: #fcf8e3; padding: .2em; }
+ol, ul {margin-bottom: 10px; margin-top: 0; }
+dl {margin-bottom: 20px; margin-top: 0; }
+dd, dt {line-height: 1.42857143; }
+dt {font-weight: 700; }
+dd {margin-left: 0; }
+blockquote {border-left: 5px solid #eee; font-size: 17.5px; margin: 0 0 20px; padding: 10px 20px; }
+address {font-style: normal; line-height: 1.42857143; margin-bottom: 20px; }
+code, kbd, pre, samp {font-family: Menlo,Monaco,Consolas,"Courier New",monospace; }
+code {background-color: #f9f2f4; border-radius: 4px; color: #c7254e; font-size: 90%; padding: 2px 4px; }
+kbd {background-color: #333; border-radius: 3px; box-shadow: inset 0 -1px 0 rgba(0,0,0,.25); color: #fff; font-size: 90%; padding: 2px 4px; webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.25); }
+pre {background-color: #f5f5f5; border: 1px solid #ccc; border-radius: 4px; color: #333; display: block; font-size: 13px; line-height: 1.42857143; margin: 0 0 10px; padding: 9.5px; word-break: break-all; word-wrap: break-word; }
+.container {margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; }
+table {background-color: transparent; }
+caption {color: #777; padding-bottom: 8px; padding-top: 8px; text-align: left; }
+th {text-align: left; }
+fieldset {border: 0; margin: 0; min-width: 0; padding: 0; }
+legend {border: 0; border-bottom: 1px solid #e5e5e5; color: #333; display: block; font-size: 21px; line-height: inherit; margin-bottom: 20px; padding: 0; width: 100%; }
+label {display: inline-block; font-weight: 700; margin-bottom: 5px; max-width: 100%; }
+input[type="checkbox"] {line-height: normal; margin: 4px 0 0; margin-top: 1px \9; }
+input[type="checkbox"]:focus {outline: 5px auto -webkit-focus-ring-color; outline: thin dotted; outline-offset: -2px; }
+output {color: #555; display: block; font-size: 14px; line-height: 1.42857143; padding-top: 7px; }
+.form-control {background-color: #fff; background-image: none; border: 1px solid #ccc; border-radius: 4px; box-shadow: inset 0 1px 1px rgba(0,0,0,.075); color: #555; display: block; font-size: 14px; height: 34px; line-height: 1.42857143; o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; padding: 6px 12px; transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075); webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s; width: 100%; }
+.form-control:focus {border-color: #66afe9; box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6); outline: 0; webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6); }
+.form-control::-moz-placeholder {color: #999; opacity: 1; }
+.checkbox {display: block; margin-bottom: 10px; margin-top: 10px; position: relative; }
+.checkbox label {cursor: pointer; font-weight: 400; margin-bottom: 0; min-height: 20px; padding-left: 20px; }
+.checkbox input[type="checkbox"] {margin-left: -20px; margin-top: 4px \9; position: absolute; }
+.btn {background-image: none; border: 1px solid transparent; border-radius: 4px; cursor: pointer; display: inline-block; font-size: 14px; font-weight: 400; line-height: 1.42857143; margin-bottom: 0; moz-user-select: none; ms-touch-action: manipulation; ms-user-select: none; padding: 6px 12px; text-align: center; touch-action: manipulation; user-select: none; vertical-align: middle; webkit-user-select: none; white-space: nowrap; }
+.btn:active:focus, .btn:focus {outline: 5px auto -webkit-focus-ring-color; outline: thin dotted; outline-offset: -2px; }
+.btn:focus, .btn:hover {color: #333; text-decoration: none; }
+.btn:active {background-image: none; box-shadow: inset 0 3px 5px rgba(0,0,0,.125); outline: 0; webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125); }
+.btn-primary {background-color: #337ab7; border-color: #2e6da4; color: #fff; }
+.btn-primary:active, .btn-primary:focus, .btn-primary:hover {background-color: #286090; border-color: #204d74; color: #fff; }
+.btn-primary:active {background-image: none; }
+.btn-lg {border-radius: 6px; font-size: 18px; line-height: 1.3333333; padding: 10px 16px; }
+.btn-block {display: block; width: 100%; }
+.container::after, .container::before {content: " "; display: table; }
+.container::after {clear: both; }
+body {background-color: #eee; padding-bottom: 40px; padding-top: 40px; }
+.form-signin {margin: 0 auto; max-width: 330px; padding: 15px; }
+.form-signin .form-signin-heading, .form-signin .checkbox {margin-bottom: 10px; }
+.form-signin .checkbox {font-weight: normal; }
+.form-signin .form-control {box-sizing: border-box; font-size: 16px; height: auto; moz-box-sizing: border-box; padding: 10px; position: relative; webkit-box-sizing: border-box; }
+.form-signin .form-control:focus {z-index: 2; }
+.form-signin input[type="email"] {border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: -1px; }
+.form-signin input[type="password"] {border-top-left-radius: 0; border-top-right-radius: 0; margin-bottom: 10px; }
