@@ -162,7 +162,23 @@ Yet code is quite small because all the CSS is added through links. But... if yo
 
 File bootstrap.min.css has line about 115000 symbols long in it. And it is after "minification"? Bullshit!
 
-Soon we will find out what to do with all this mess!
+First of all let's serve our own style sheets. Main difference with old version:
+
+```html
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="css/signin.css">
+
+  </head>
+```
 
 ## Javascript
 
@@ -672,6 +688,32 @@ function manageAndReturnCookie(req, res, cookieJar) {
 	return cookie;
 }
 
+function error404(res) {
+	res.writeHead(404);
+	res.end('Not found: ' + err);
+}
+
+function readAndSendFileOr404(filePath, res) {
+	fs.readFile(filePath,
+		function (err, data) {
+			if (err) {
+				error404(res);
+			}
+			else {
+				res.end(data);
+			}
+		}
+	);
+}
+
+var getURLsToFiles = {
+	"/": "./index.html",
+	"/index.html": "./index.html",
+	"/signin.html": "./signin.html",
+	"/css/bootstrap.min.css": "./css/bootstrap.min.css",
+	"/css/signin.css": "./css/signin.css",
+}
+
 require("http").createServer(
 	function (req, res) {
 		var cookie = manageAndReturnCookie(req, res, sessions);
@@ -697,25 +739,21 @@ require("http").createServer(
 				res.writeHead(200);
 				res.end(sessions[cookie]);
 			}
+			else if (getURLsToFiles[req.url] != undefined) {
+				readAndSendFileOr404(getURLsToFiles[req.url], res);
+			}
 			else {
-				fs.readFile("./index.html", function (err, data) {
-					if (err) {
-						res.writeHead(404);
-						res.end('Not found' + err);
-					}
-
-					res.end(data);
-				});
+				error404(res);
 			}
 		}
 	}
 ).listen(1337, '127.0.0.1');
-console.log('Our multi-user server running at http://127.0.0.1:1337/');
+console.log('Our multi-user css-serving server running at http://127.0.0.1:1337/');
 ```
 
 More details at [this](#cookies-and-sessions) part.
 
-It is quite complicated
+It is quite complicated yet no additional libs.
 
 ## Popular names and concepts
 

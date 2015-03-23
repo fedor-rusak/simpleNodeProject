@@ -34,17 +34,30 @@ function manageAndReturnCookie(req, res, cookieJar) {
 	return cookie;
 }
 
+function error404(res) {
+	res.writeHead(404);
+	res.end('Not found: ' + err);
+}
+
 function readAndSendFileOr404(filePath, res) {
 	fs.readFile(filePath,
 		function (err, data) {
 			if (err) {
-				res.writeHead(404);
-				res.end('Not found' + err);
+				error404(res);
 			}
-
-			res.end(data);
+			else {
+				res.end(data);
+			}
 		}
 	);
+}
+
+var getURLsToFiles = {
+	"/": "./index.html",
+	"/index.html": "./index.html",
+	"/signin.html": "./signin.html",
+	"/css/bootstrap.min.css": "./css/bootstrap.min.css",
+	"/css/signin.css": "./css/signin.css",
 }
 
 require("http").createServer(
@@ -72,11 +85,11 @@ require("http").createServer(
 				res.writeHead(200);
 				res.end(sessions[cookie]);
 			}
-			else if (req.url == '/signin.html') {
-				readAndSendFileOr404("."+req.url, res);
+			else if (getURLsToFiles[req.url] != undefined) {
+				readAndSendFileOr404(getURLsToFiles[req.url], res);
 			}
 			else {
-				readAndSendFileOr404("./index.html", res);
+				error404(res);
 			}
 		}
 	}
