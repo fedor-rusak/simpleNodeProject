@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Event delegation</title>
+
+		<script>
+			window.onload = function() {
+				document.querySelector("#container").onclick = function(e) {
+					if (e.target.tagName == "INPUT") {
+						alert(e.target.value)
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div>Multiple buttons - one callback!</div>
+
+		<div id="container">
+			<input type="submit" value="Create!"></input>
+			<input type="submit" value="Delete!"></input>
+			<input type="submit" value="Submit!"></input>
+			<input type="submit" value="Lumos!"></input>
+			<input type="submit" value="Avada cedavra!"></input>
+			<input type="submit" value="42!"></input>
+			<input type="submit" value="Show me the money!"></input>
+			<input type="submit" value="IDDQD!"></input>
+			<input type="submit" value="IDKFA!"></input>
+			<input type="submit" value="GTFO!"></input>
+			<input type="submit" value="Express yourself!"></input>
+		</div>
+	</body>
+</html>

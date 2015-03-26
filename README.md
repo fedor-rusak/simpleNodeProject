@@ -761,6 +761,10 @@ It is quite complicated yet no additional libs.
 
 Some interesting stuff.
 
+### Event delegation
+
+When you want to trigger one logic on multiple elements with same parent node.
+
 ### Table manupulation
 
 This is an example of dynamic creating and deleting of HTML tables. Client-side only.
