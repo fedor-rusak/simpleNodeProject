@@ -757,7 +757,17 @@ More details at [this](#cookies-and-sessions) part.
 
 It is quite complicated yet no additional libs.
 
+## Pieces
+
+Some interesting stuff.
+
+### Table manupulation
+
+This is an example of dynamic creating and deleting of HTML tables. Client-side only.
+
 ## Hacks&Tricks
+
+Little things to make something easier.
 
 ### Minimize CSS
 

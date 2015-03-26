@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Dynamic table manipulation</title>
+
+		<style>
+			table {margin: 20px;}
+		</style>
+
+		<script>
+			window.onload = function() {
+				function generateTableRow(length, startValue) {
+					var row = document.createElement("tr");
+
+					startValue = startValue || 0;
+
+					for (var i = 0; i < length; i++) {
+						var td = document.createElement("td");
+						td.innerHTML = startValue+i;
+						row.appendChild(td);
+					}
+
+					return row;
+				}
+
+				function generateTable(rowsNumber, columnsNumber) {
+					var thead = document.createElement("thead");
+
+					thead.appendChild(generateTableRow(columnsNumber), 1);
+
+					var tbody = document.createElement("tbody");
+
+					for (var i = 0; i < rowsNumber; i ++) {
+						tbody.appendChild(generateTableRow(columnsNumber, i*columnsNumber));
+					}
+
+					var result = document.createElement("table");
+					result.appendChild(thead);
+					result.appendChild(tbody);
+
+					return result;
+				}
+
+				document.querySelector("#create").onclick = function(e) {
+					var rowsNumber = document.querySelector("#rowsNumber").value;
+					rowsNumber = parseInt(rowsNumber) || 1;
+					var columnsNumber = document.querySelector("#columnsNumber").value;
+					columnsNumber = parseInt(columnsNumber) || 1;
+
+					var table = generateTable(rowsNumber, columnsNumber);
+					table.border = "1";
+
+					document.querySelector("#dynamic").appendChild(table);
+				}
+
+				document.querySelector("#delete").onclick = function(e) {
+					var tables = document.querySelectorAll("table");
+
+					if (tables.length > 0) {
+						var table = tables[tables.length-1];
+
+						table.parentNode.removeChild(table);
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div>Click to mess with tables.</div>
+
+		<div>
+			<input type="submit" value="Create!" id="create"></input>
+			<input type="text" value="1" id="rowsNumber"></input>
+			<input type="text" value="1" id="columnsNumber"></input>
+		</div>
+		<div>
+			<input type="submit" value="Delete!" id="delete"></input>
+		</div>
+
+		<div id="dynamic"></div>
+	</body>
+</html>
