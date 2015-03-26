@@ -10,15 +10,17 @@
 
 		<script>
 			window.onload = function() {
-				function generateTableRow(length, startValue) {
+				function generateTableRow(length, startValue, tagName) {
 					var row = document.createElement("tr");
 
 					startValue = startValue || 0;
 
+					tagName = tagName || "td";
+
 					for (var i = 0; i < length; i++) {
-						var td = document.createElement("td");
-						td.innerHTML = startValue+i;
-						row.appendChild(td);
+						var cell = document.createElement(tagName);
+						cell.innerHTML = startValue+i;
+						row.appendChild(cell);
 					}
 
 					return row;
@@ -26,8 +28,7 @@
 
 				function generateTable(rowsNumber, columnsNumber) {
 					var thead = document.createElement("thead");
-
-					thead.appendChild(generateTableRow(columnsNumber), 1);
+					thead.appendChild(generateTableRow(columnsNumber, 1, "th"));
 
 					var tbody = document.createElement("tbody");
 
